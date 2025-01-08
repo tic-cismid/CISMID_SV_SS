@@ -1,0 +1,177 @@
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hotspot {
+position: relative;
+width: 20px;
+height: 20px;
+background-color: red;
+border-radius: 50%;
+border: 2px solid white;
+cursor: pointer;
+transform: translate(-50%, -50%);
+pointer-events: auto; /* Ensure interactivity */
+overflow: hidden;     /* Prevent any overflow */
+user-select: none;    /* Prevent text selection on hotspots */
+}
+.hotspot:hover {
+background-color: blue;
+transform: translate(10%)
+}
+
+#pano {
+  width: 100%;
+  height: 100%;
+  /* Remove or comment out overflow:hidden if not strictly needed */
+  /* overflow: hidden; */
+}
+
+#compass {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+#compass-arrow {
+  position: absolute;
+  width: 50%;
+  height: 2px;
+  background: red;
+  transform-origin: bottom center;
+  transform: rotate(0deg);
+}
+
+.compass {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, #ffffff, #d1d5db);
+  border: 5px solid #4b5563;
+  border-radius: 50%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Compass Arrow */
+.compass-arrow {
+  position: absolute;
+  top: 26%;
+  left: 49%;
+  width: 4px;
+  height: 35px;
+  background: rgb(98, 0, 255);
+  transform-origin: center bottom;
+  z-index: 2;
+  box-shadow: 0 0 5px rgba(255, 0, 0, 0.6);
+}
+
+/* Arrowhead */
+.compass-arrow:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 12px solid red;
+  transform: translateX(-50%) translateY(-100%) rotate(0deg);
+}
+
+/* Compass Border */
+.compass::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 140px;
+  height: 140px;
+  border: 2px solid #4b5563;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Cardinal Directions */
+.compass-label {
+  position: absolute;
+  color: #1f2937;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.compass-label.north { top: 10px; left: 50%; transform: translateX(-50%); }
+.compass-label.east { top: 50%; right: 10px; transform: translateY(-50%); }
+.compass-label.south { bottom: 10px; left: 50%; transform: translateX(-50%); }
+.compass-label.west { top: 50%; left: 10px; transform: translateY(-50%); }
+
+#map {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 200px;
+  height: 200px;
+  border: 2px solid #4b5563;
+  border-radius: 5px;
+  z-index: 9999; /* Increase this to ensure it's on top */
+  background: #fff;
+  overflow: hidden;
+}
+/* Increase z-index and ensure pointer-events */
+#map-resize-handle-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: rgba(0,0,0,0.3);
+  cursor: n-resize;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+/* New left handle */
+#map-resize-handle-left {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 10px;
+  background: rgba(0,0,0,0.3);
+  cursor: w-resize;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+#map-resize-handle-top-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  background: rgba(0,0,0,0.3);
+  cursor: nw-resize;
+  z-index: 9999;
+  pointer-events: auto;
+}
+
+
+/* Ensure Leaflet map doesn't overshadow the handle */
+.leaflet-container {
+  z-index: 1 !important;
+}

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+  <title>Street View</title>
+
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <!-- Marzipano -->
+  <script src="https://cdn.jsdelivr.net/npm/marzipano/dist/marzipano.js"></script>
+
+  <!-- Your custom CSS (styles.css) -->
+  <link rel="stylesheet" href="/360/styles.css">
+</head>
+<body>
+  <!-- Panorama container -->
+  <div id="pano"></div>
+
+  <!-- Compass -->
+  <div class="compass">
+    <div class="compass-arrow" id="compass-arrow2"></div>
+    <div class="compass-label north">N</div>
+    <div class="compass-label east">E</div>
+    <div class="compass-label south">S</div>
+    <div class="compass-label west">W</div>
+  </div>
+
+  <!-- Leaflet map + resize handles -->
+  <div id="map">
+    <div id="map-resize-handle-top"></div>
+    <div id="map-resize-handle-left"></div>
+    <div id="map-resize-handle-top-left"></div>
+  </div>
+
+  <!-- 1) Load module.js (defines window.initMarzipano) -->
+  <script src="/360/module.js"></script>
+
+  <!-- 2) Fetch panoramas from /api/panoramas, then call initMarzipano(...) -->
+  <script>
+    fetch('/api/panoramas')
+      .then(response => response.json())
+      .then(panoramas => {
+        // Pass the panoramas object to the global function defined in module.js
+        initMarzipano(panoramas);
+      })
+      .catch(err => {
+        console.error("Error loading panoramas:", err);
+      });
+  </script>
+</body>
+</html>
